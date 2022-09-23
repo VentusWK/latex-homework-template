@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
 
 \usetikzlibrary{automata,positioning}
 
@@ -166,261 +168,73 @@
     \\
     \solution
     \\
-    $R=$
+    $R=000^*+((01+10)0+000^*1)0^*$
     
 
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Write part of \alg{Quick-Sort($list, start, end$)}
-
-    \begin{algorithm}[]
-        \begin{algorithmic}[1]
-            \Function{Quick-Sort}{$list, start, end$}
-                \If{$start \geq end$}
-                    \State{} \Return{}
-                \EndIf{}
-                \State{} $mid \gets \Call{Partition}{list, start, end}$
-                \State{} \Call{Quick-Sort}{$list, start, mid - 1$}
-                \State{} \Call{Quick-Sort}{$list, mid + 1, end$}
-            \EndFunction{}
-        \end{algorithmic}
-        \caption{Start of QuickSort}
-    \end{algorithm}
+    Use the procedure described in Lemma 1.55 to covert the following regular expressions to nondeterministic finite automata.
+    \\
+    \part{}
+    $(0\cup1)^*000(0\cup1)^*$
+    \\
+    \solution
+    \\
+    \includegraphics[scale=0.50]{3a.png}
+    \\
+    \part{}
+    $(((00)^*(11)) \cup 01)^*$
+    \\
+    \solution
+    \\
+    \includegraphics[scale=0.42]{3b.png}
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    Suppose we would like to fit a straight line through the origin, i.e.,
-    \(Y_i = \beta_1 x_i + e_i\) with \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
-    and \(\Var [e_i] = \sigma^2_e\) and \(\Cov[e_i, e_j] = 0, \forall i \neq
-    j\).
+    Use the procedure described in Lemma 1.60 to covert the following finite automata to regular expressions.
+    \part{}
     \\
-
-    \part
-
-    Find the least squares esimator for \(\hat{\beta_1}\) for the slope
-    \(\beta_1\).
-    \\
-
     \solution
-
-    To find the least squares estimator, we should minimize our Residual Sum
-    of Squares, RSS:
-
-    \[
-        \begin{split}
-            RSS &= \sum_{i = 1}^{n} {(Y_i - \hat{Y_i})}^2
-            \\
-            &= \sum_{i = 1}^{n} {(Y_i - \hat{\beta_1} x_i)}^2
-        \end{split}
-    \]
-
-    By taking the partial derivative in respect to \(\hat{\beta_1}\), we get:
-
-    \[
-        \pderiv{
-            \hat{\beta_1}
-        }{RSS}
-        = -2 \sum_{i = 1}^{n} {x_i (Y_i - \hat{\beta_1} x_i)}
-        = 0
-    \]
-
-    This gives us:
-
-    \[
-        \begin{split}
-            \sum_{i = 1}^{n} {x_i (Y_i - \hat{\beta_1} x_i)}
-            &= \sum_{i = 1}^{n} {x_i Y_i} - \sum_{i = 1}^{n} \hat{\beta_1} x_i^2
-            \\
-            &= \sum_{i = 1}^{n} {x_i Y_i} - \hat{\beta_1}\sum_{i = 1}^{n} x_i^2
-        \end{split}
-    \]
-
-    Solving for \(\hat{\beta_1}\) gives the final estimator for \(\beta_1\):
-
-    \[
-        \begin{split}
-            \hat{\beta_1}
-            &= \frac{
-                \sum {x_i Y_i}
-            }{
-                \sum x_i^2
-            }
-        \end{split}
-    \]
-
-    \pagebreak
-
-    \part
-
-    Calculate the bias and the variance for the estimated slope
-    \(\hat{\beta_1}\).
     \\
-
+    $(a^*ba^*b)^*a^*ba^*$
+    \\
+    \part{}
+    \\
     \solution
-
-    For the bias, we need to calculate the expected value
-    \(\E[\hat{\beta_1}]\):
-
-    \[
-        \begin{split}
-            \E[\hat{\beta_1}]
-            &= \E \left[ \frac{
-                \sum {x_i Y_i}
-            }{
-                \sum x_i^2
-            }\right]
-            \\
-            &= \frac{
-                \sum {x_i \E[Y_i]}
-            }{
-                \sum x_i^2
-            }
-            \\
-            &= \frac{
-                \sum {x_i (\beta_1 x_i)}
-            }{
-                \sum x_i^2
-            }
-            \\
-            &= \frac{
-                \sum {x_i^2 \beta_1}
-            }{
-                \sum x_i^2
-            }
-            \\
-            &= \beta_1 \frac{
-                \sum {x_i^2 \beta_1}
-            }{
-                \sum x_i^2
-            }
-            \\
-            &= \beta_1
-        \end{split}
-    \]
-
-    Thus since our estimator's expected value is \(\beta_1\), we can conclude
-    that the bias of our estimator is 0.
     \\
-
-    For the variance:
-
-    \[
-        \begin{split}
-            \Var[\hat{\beta_1}]
-            &= \Var \left[ \frac{
-                \sum {x_i Y_i}
-            }{
-                \sum x_i^2
-            }\right]
-            \\
-            &=
-            \frac{
-                \sum {x_i^2}
-            }{
-                \sum x_i^2 \sum x_i^2
-            } \Var[Y_i]
-            \\
-            &=
-            \frac{
-                \sum {x_i^2}
-            }{
-                \sum x_i^2 \sum x_i^2
-            } \Var[Y_i]
-            \\
-            &=
-            \frac{
-                1
-            }{
-                \sum x_i^2
-            } \Var[Y_i]
-            \\
-            &=
-            \frac{
-                1
-            }{
-                \sum x_i^2
-            } \sigma^2
-            \\
-            &=
-            \frac{
-                \sigma^2
-            }{
-                \sum x_i^2
-            }
-        \end{split}
-    \]
-
+    $((a\cup b)a^*b(ba^*b)^*a)^*(\epsilon\cup(a\cup b)a^*b(ba^*b)^*)$
 \end{homeworkProblem}
 
-\pagebreak
-
 \begin{homeworkProblem}
-    Prove a polynomial of degree \(k\), \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots
-    + a_1n^1 + a_0n^0\) is a member of \(\Theta(n^k)\) where \(a_k \hdots a_0\)
-    are nonnegative constants.
-
+    Let $\Sigma=\{0,1,+,=\}$ and
+    $ADD = \{x=y+z \mid x,y,z \text{ are binary integers, and } x \text{ is the sum of } y \text { and } z \}$
+    \\ Prove that ADD is not regular.
+    \\
+    \solution
     \begin{proof}
-        To prove that \(a_kn^k + a_{k - 1}n^{k - 1} + \hdots + a_1n^1 +
-        a_0n^0\), we must show the following:
-
-        \[
-            \exists c_1 \exists c_2 \forall n \geq n_0,\ {c_1 \cdot g(n) \leq
-            f(n) \leq c_2 \cdot g(n)}
-        \]
-
-        For the first inequality, it is easy to see that it holds because no
-        matter what the constants are, \(n^k \leq a_kn^k + a_{k - 1}n^{k - 1} +
-        \hdots + a_1n^1 + a_0n^0\) even if \(c_1 = 1\) and \(n_0 = 1\).  This
-        is because \(n^k \leq c_1 \cdot a_kn^k\) for any nonnegative constant,
-        \(c_1\) and \(a_k\).
-        \\
-
-        Taking the second inequality, we prove it in the following way.
-        By summation, \(\sum\limits_{i=0}^k a_i\) will give us a new constant,
-        \(A\). By taking this value of \(A\), we can then do the following:
-
-        \[
-            \begin{split}
-                a_kn^k + a_{k - 1}n^{k - 1} + \hdots + a_1n^1 + a_0n^0 &=
-                \\
-                &\leq (a_k + a_{k - 1} \hdots a_1 + a_0) \cdot n^k
-                \\
-                &= A \cdot n^k
-                \\
-                &\leq c_2 \cdot n^k
-            \end{split}
-        \]
-
-        where \(n_0 = 1\) and \(c_2 = A\). \(c_2\) is just a constant. Thus the
-        proof is complete.
+        Let string $s$ be $1^p=1^p+0^p$. Since $1^p$ is as long as the pumping length $p$, the substring $y$ must consist of only 1s. For any arbitrary $y$, if $y$ is pumped down (if $y=0$), the equality of $x=y+z$ does not hold since there will be less 1s in $x$ than $y$.
     \end{proof}
 \end{homeworkProblem}
 
-\pagebreak
-
-%
-% Non sequential homework problems
-%
-
-% Jump to problem 18
-\begin{homeworkProblem}[18]
-    Evaluate \(\sum_{k=1}^{5} k^2\) and \(\sum_{k=1}^{5} (k - 1)^2\).
-\end{homeworkProblem}
-
-% Continue counting to 19
 \begin{homeworkProblem}
-    Find the derivative of \(f(x) = x^4 + 3x^2 - 2\)
-\end{homeworkProblem}
+    Prove that the following language is not regular. You may use the pumping lemma and the closure of the class of regular languages under union, intersection, and complement.
+    $\{w\mid w \in \{0, 1\}^* \text{ is not a palindrome}\}$
+    \\
+    \solution
+    \begin{proof}
+        Assume the language $L$ is regular.\\
+        The language $\overline{L}$ = $\{w \mid w \in \{0,1\}^* \text{ is a palindrome}\}$ must be regular due to closure under complement. \\
+        Consider the string $0^p10^p$ that is accepted by $\overline{L}$. \\
+        Since $0^p$ is as long as the pumping length $p$, the substring $y$ must only consist of 0s. \\
+        If substring $y$ is pumped up or pumped down, the number of 0s before 1 will not equal the number of 0s after, resulting in a whole string that isn't a palindrome. \\
+        Therefore, $\overline{L}$ is not a regular language.
+        If $\overline{L}$ is not a regular language, $L$ is not a regular language through closure, resulting in a proof by contradiction.
 
-% Go back to where we left off
-\begin{homeworkProblem}[6]
-    Evaluate the integrals
-    \(\int_0^1 (1 - x^2) \dx\)
-    and
-    \(\int_1^{\infty} \frac{1}{x^2} \dx\).
+
+    \end{proof}
 \end{homeworkProblem}
 
 \end{document}
