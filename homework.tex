@@ -88,8 +88,8 @@
 %   - Author
 %
 
-\newcommand{\hmwkTitle}{Assignment\ \#3}
-\newcommand{\hmwkDueDate}{September 22, 2022}
+\newcommand{\hmwkTitle}{Assignment\ \#8}
+\newcommand{\hmwkDueDate}{November 11, 2022}
 \newcommand{\hmwkClass}{Formal}
 \newcommand{\hmwkClassTime}{4:10 PM}
 \newcommand{\hmwkClassInstructor}{Professor Matthew Patitz}
@@ -102,7 +102,7 @@
 \title{
     \vspace{2in}
     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 11:59pm}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 4:00 PM}\\
     \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
     \vspace{3in}
 }
@@ -144,97 +144,47 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Prove Theorem 1 (i.e. if L is a regular language, then $\overline{L}=\Sigma^*/L$ is also regular).
-    \\
-    \solution
-    \\
-    If L is a regular language, that must mean there is a DFA $M=(Q,\Sigma,\delta,q_0,F)$ that recognizes the language.
-    Since $\overline{L}$ accepts any expression that isn't accepted by $L$, all that needs to be done is complement the accepting states.
-    DFA $\overline{M}=(Q,\Sigma,\delta,q_0,Q/F)$ should exist such that $L(\overline{M})=\overline{L}$.
+    Create a turing machine T such that for an input A where A is a DFA:
+    \begin{enumerate}
+        \item If every state in A is an accept state, accept. Otherwise, reject.
+    \end{enumerate}
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Give regular expressions generating the following languages. In all parts, the alphabet is \{0, 1\}.
-    \\
-    \part{}
-    $\{w \mid \text{every odd position of } w \text{ is a } 1\}$
-    \\
-    \solution
-    \\
-    $R=(1\Sigma)^*$
-    \\
-    \part{}
-    $\{w \mid w \text{ contains at least two 0s and at most one 1}\}$
-    \\
-    \solution
-    \\
-    $R=000^*+((01+10)0+000^*1)0^*$
-    
-
+    Proof by contradiction \\
+    Suppose a bijection f exists between B and N. \\
+    We can create a sequence $x \in B$ such that x isn't paired with anything in N. \\
+    If we take the $n$th digit of the $n$th sequence of B and change it to anything else (arbitrarily), we can create a new $x$ on the diagonal that is in B, but doesn't correspond to any of the natural numbers.
+    This is a contradiction, meaning that B must be uncountable.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Use the procedure described in Lemma 1.55 to covert the following regular expressions to nondeterministic finite automata.
-    \\
-    \part{}
-    $(0\cup1)^*000(0\cup1)^*$
-    \\
-    \solution
-    \\
-    \includegraphics[scale=0.50]{3a.png}
-    \\
-    \part{}
-    $(((00)^*(11)) \cup 01)^*$
-    \\
-    \solution
-    \\
-    \includegraphics[scale=0.42]{3b.png}
-\end{homeworkProblem}
-
-\pagebreak
-
-\begin{homeworkProblem}
-    Use the procedure described in Lemma 1.60 to covert the following finite automata to regular expressions.
-    \part{}
-    \\
-    \solution
-    \\
-    $(a^*ba^*b)^*a^*ba^*$
-    \\
-    \part{}
-    \\
-    \solution
-    \\
-    $((a\cup b)a^*b(ba^*b)^*a)^*(\epsilon\cup(a\cup b)a^*b(ba^*b)^*)$
+    We can map the three tuple $(i, j, k)$ to the infinite subset of N where $f(n) = 2^i3^j5^k$. Since the prime factorizations of a number is unique to itself, we can guarantee the relationship is one-to-one. The relationship is also onto since we can generate any prime factorization of the form $2^i3^j5^k$ with any arbitrary i, j, or k. This means a bijection exists, meaning the set T is countable. 
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Let $\Sigma=\{0,1,+,=\}$ and
-    $ADD = \{x=y+z \mid x,y,z \text{ are binary integers, and } x \text{ is the sum of } y \text { and } z \}$
-    \\ Prove that ADD is not regular.
-    \\
-    \solution
-    \begin{proof}
-        Let string $s$ be $1^p=1^p+0^p$. Since $1^p$ is as long as the pumping length $p$, the substring $y$ must consist of only 1s. For any arbitrary $y$, if $y$ is pumped down (if $y=0$), the equality of $x=y+z$ does not hold since there will be less 1s in $x$ than $y$.
-    \end{proof}
+    Construct a turing machine T that takes in the encoding of a DFA M and string w:
+    \begin{enumerate}
+        \item Construct a string $w^R$
+        \item Run string w through DFA M
+        \item If $w$ is accepted by M, run string $w^R$ through DFA M, otherwise T rejects
+        \item If $w^R$ is accepted by M, T accepts, otherwise T rejects
+    \end{enumerate}
+    S is decidable.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Prove that the following language is not regular. You may use the pumping lemma and the closure of the class of regular languages under union, intersection, and complement.
-    $\{w\mid w \in \{0, 1\}^* \text{ is not a palindrome}\}$
-    \\
-    \solution
-    \begin{proof}
-        Assume the language $L$ is regular.\\
-        The language $\overline{L}$ = $\{w \mid w \in \{0,1\}^* \text{ is a palindrome}\}$ must be regular due to closure under complement. \\
-        Consider the string $0^p10^p$ that is accepted by $\overline{L}$. \\
-        Since $0^p$ is as long as the pumping length $p$, the substring $y$ must only consist of 0s. \\
-        If substring $y$ is pumped up or pumped down, the number of 0s before 1 will not equal the number of 0s after, resulting in a whole string that isn't a palindrome. \\
-        Therefore, $\overline{L}$ is not a regular language.
-        If $\overline{L}$ is not a regular language, $L$ is not a regular language through closure, resulting in a proof by contradiction.
-
-
-    \end{proof}
+    Proof by contradiction \\
+    Assume T is a decidable language and that R decides it.
+    Construct a turing machine J such that on input $\langle M, w\rangle$ where M is a turing machine and w is the input string:
+    \begin{enumerate}
+        \item Create a turing machine S such that on an input $x$
+        \begin{enumerate}
+            \item if x has the form 01, accept
+            \item else, run the input w on turing machine M and accept if M accepts w, otherwise reject
+        \end{enumerate}
+        \item run R on $\langle S\rangle$
+        \item If R accepts, J accepts, reject otherwise.
+    \end{enumerate}
 \end{homeworkProblem}
-
 \end{document}
